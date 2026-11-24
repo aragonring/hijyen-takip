@@ -136,8 +136,6 @@ def siteleri_tara():
 
         browser.close()
 
-    telegram_gonder("✅ İŞKUR botu bağlantısı aktif!", token=ISKUR_TELEGRAM_TOKEN)
-
     if yeni_bulunan:
         kayitlari_kaydet(gorulenler)
 
