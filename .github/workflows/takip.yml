@@ -22,8 +22,21 @@ jobs:
           pip install playwright requests
           playwright install chromium
 
-      - name: Betiği çalıştır
+      - name: e-Yaygın Betiğini Çalıştır
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: python kontrol.py
+
+      - name: Kamu İlan Sitelerini Tara
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: python ilan_takip.py
+
+      - name: Görülen İlanları Kaydet
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add gorulen_ilanlar.json || true
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Yeni ilan kaydı güncellendi" && git push)
