@@ -1,0 +1,24 @@
+name: e-Yaygin Kurs Takip
+
+on:
+  schedule:
+    - cron: '*/15 * * * *
+  workflow_dispatch:
+
+jobs:
+  kontrol:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Gerekli kütüphaneleri kur
+        run: |
+          pip install playwright requests
+          playwright install chromium
+      - name: Betiği çalıştır
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: python kontrol.py
