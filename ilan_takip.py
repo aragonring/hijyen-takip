@@ -137,6 +137,8 @@ def siteleri_tara():
 
         browser.close()
 
+    telegram_gonder("✅ ilan.gov.tr botu bağlantısı aktif!", token=ILANGOV_TELEGRAM_TOKEN)
+
     if yeni_bulunan:
         kayitlari_kaydet(gorulenler)
 
