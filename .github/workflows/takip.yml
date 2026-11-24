@@ -31,6 +31,7 @@ jobs:
       - name: Kamu İlan Sitelerini Tara
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          ISKUR_TELEGRAM_TOKEN: ${{ secrets.ISKUR_TELEGRAM_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: python ilan_takip.py
 
