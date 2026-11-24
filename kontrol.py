@@ -40,7 +40,7 @@ def kurs_kontrol():
         # 4. Sonuç Tablosunu Kontrol Etme
         tablo_metni = page.inner_text("#rgKurslar")
 
-        if "Gösterilecek kayıt bulunmamaktadır" not in tablo_metni and "HİJYEN" in tablo_metni.upper():
+        if "Gösterilecek kayıt bulunmamaktadır" in tablo_metni and "HİJYEN" in tablo_metni.upper():
             telegram_gonder("🚨 e-Yaygın'da Sivas Merkez için yeni Hijyen Kursu açıldı! Hemen başvur: https://e-yaygin.meb.gov.tr/pageKurslar.aspx")
 
         browser.close()
