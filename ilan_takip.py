@@ -6,6 +6,7 @@ import requests
 from playwright.sync_api import sync_playwright
 
 TELEGRAM_TOKEN = os.environ["TELEGRAM_TOKEN"]
+ILANGOV_TELEGRAM_TOKEN = os.environ["ILANGOV_TELEGRAM_TOKEN"]
 ISKUR_TELEGRAM_TOKEN = os.environ["ISKUR_TELEGRAM_TOKEN"]
 CHAT_ID = os.environ["CHAT_ID"]
 KAYIT_DOSYASI = "gorulen_ilanlar.json"
@@ -63,7 +64,7 @@ def siteleri_tara():
         )
         page = context.new_page()
 
-        # 1. İLAN.GOV.TR (MEVCUT BOT)
+        # 1. İLAN.GOV.TR (AYRI BOT - ILANGOV_TELEGRAM_TOKEN)
         try:
             ilan_url = "https://www.ilan.gov.tr/ilan/kategori/9/memur-alim-ilanlari"
             page.goto(ilan_url, timeout=60000, wait_until="domcontentloaded")
@@ -89,11 +90,11 @@ def siteleri_tara():
                             f"📄 İlan: {metin}\n"
                             f"🔗 Link: {ilan_url}"
                         )
-                        telegram_gonder(mesaj, token=TELEGRAM_TOKEN)
+                        telegram_gonder(mesaj, token=ILANGOV_TELEGRAM_TOKEN)
         except Exception as e:
             print(f"ilan.gov.tr hatası: {e}")
 
-        # 2. İŞKUR KAMU AÇIK İŞ İLANLARI (YENİ AYRI BOT)
+        # 2. İŞKUR KAMU AÇIK İŞ İLANLARI (AYRI BOT - ISKUR_TELEGRAM_TOKEN)
         try:
             iskur_url = "https://esube.iskur.gov.tr/istihdam/AcikisilanAra.aspx"
             page.goto(iskur_url, timeout=60000, wait_until="domcontentloaded")
