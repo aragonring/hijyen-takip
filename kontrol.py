@@ -7,8 +7,9 @@ CHAT_ID = os.environ["CHAT_ID"]
 
 def telegram_gonder(mesaj):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    requests.post(url, data={"chat_id": CHAT_ID, "text": mesaj})
-
+    data = {"chat_id": CHAT_ID, "text": mesaj}
+    yanit = requests.post(url, data=data)
+    print("TELEGRAM YANITI:", yanit.text)
 def kurs_kontrol():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
