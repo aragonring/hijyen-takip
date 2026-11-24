@@ -10,6 +10,7 @@ def telegram_gonder(mesaj):
     data = {"chat_id": CHAT_ID, "text": mesaj}
     yanit = requests.post(url, data=data)
     print("TELEGRAM YANITI:", yanit.text)
+
 def kurs_kontrol():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
@@ -22,7 +23,7 @@ def kurs_kontrol():
         il_kutusu.click()
         il_kutusu.fill("SİVAS")
         page.wait_for_timeout(1500)
-        page.keyboard.press("Enter")
+        page.locator("#cmbKursIlKodu_DropDown li:has-text('SİVAS')").first.click()
         page.wait_for_timeout(2500)
 
         # 2. İlçe Seçimi (MERKEZ)
@@ -30,7 +31,7 @@ def kurs_kontrol():
         ilce_kutusu.click()
         ilce_kutusu.fill("MERKEZ")
         page.wait_for_timeout(1500)
-        page.keyboard.press("Enter")
+        page.locator("#cmbKursIlceKodu_DropDown li:has-text('MERKEZ')").first.click()
         page.wait_for_timeout(1500)
 
         # 3. Kurs Adı Yazma ve Arama
@@ -42,8 +43,13 @@ def kurs_kontrol():
         tablo_metni = page.inner_text("#rgKurslar")
         print("TABLO METNİ:", repr(tablo_metni))
 
+        # TEST MODU
         if "Gösterilecek kayıt bulunmamaktadır" in tablo_metni:
-            telegram_gonder("🚨 e-Yaygın'da Sivas Merkez için yeni Hijyen Kursu açıldı! Hemen başvur: https://e-yaygin.meb.gov.tr/pageKurslar.aspx")
+            telegram_gonder("🚨 TEST BAŞARILI: Sivas Merkez filtresi çalıştı! Link: https://e-yaygin.meb.gov.tr/pageKurslar.aspx")
+
+        # GERÇEK TAKİP MODU:
+        # if "Gösterilecek kayıt bulunmamaktadır" not in tablo_metni and "SİVAS" in tablo_metni.upper() and "HİJYEN" in tablo_metni.upper():
+        #     telegram_gonder("🚨 e-Yaygın'da Sivas Merkez için yeni Hijyen Kursu açıldı! Hemen başvur: https://e-yaygin.meb.gov.tr/pageKurslar.aspx")
 
         browser.close()
 
