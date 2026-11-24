@@ -18,13 +18,14 @@ ANAHTAR_KELIMELER = [
     r"\btemizlik\b",
     r"\bşoför\b",
     r"\bişçi\b",
+    r"\bbakım\b",
+    r"\bonarım\b",
     r"\bpersonel alım\w*\b",
     r"\bmemur alım\w*\b",
 ]
 
 YASAKLI_KELIMELER = [
     "işçilik",
-    "bakım onarım",
     "yedek parça",
     "yapım işi",
     "mal alımı",
@@ -97,17 +98,15 @@ def siteleri_tara():
             page.goto(iskur_url, timeout=60000, wait_until="domcontentloaded")
             page.wait_for_timeout(4000)
 
-            # İşyeri Türü: Kamu seçimi
-            kamu_radio = page.locator("label:has-text('Kamu'), input[value*='Kamu']").first
-            if kamu_radio.is_visible(timeout=3000):
-                kamu_radio.click(force=True)
-                page.wait_for_timeout(1500)
+            # İşyeri Türü: Kamu seçimi (Radio buton)
+            page.locator("text=Kamu").first.click(force=True)
+            page.wait_for_timeout(1500)
 
-            # Ara butonuna bas
-            ara_btn = page.locator("input[type='submit'][value*='Ara'], button:has-text('Ara'), #ctl00_ContentPlaceHolder1_btnAra").first
+            # Ara butonunu bul ve tıkla
+            ara_btn = page.locator("input[value='Ara'], #btnAra, a:has-text('Ara')").first
             if ara_btn.is_visible(timeout=3000):
                 ara_btn.click(force=True)
-                page.wait_for_timeout(5000)
+                page.wait_for_timeout(6000)
 
             satirlar = page.locator("table tr").all()
             print(f"[İŞKUR] Tablo satır sayısı: {len(satirlar)}")
