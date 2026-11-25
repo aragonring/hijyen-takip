@@ -150,7 +150,6 @@ def siteleri_tara():
                 if any(y in k_metin for y in YASAKLI_KELIMELER):
                     continue
 
-                # SCÜ zaten Sivas'ta olduğu için "sivas" kelimesi hariç meslek/alım kelimelerine bak
                 scu_anahtarlar = [k for k in ANAHTAR_KELIMELER if k != r"\bsivas\b"]
                 eslesenler = [k.replace(r"\b", "").replace(r"\w*", "") for k in scu_anahtarlar if re.search(k, k_metin)]
                 if eslesenler:
@@ -170,6 +169,8 @@ def siteleri_tara():
             print(f"SCÜ tarama hatası: {e}")
 
         browser.close()
+
+    telegram_gonder("✅ SCÜ botu bağlantısı aktif!", token=SCU_TELEGRAM_TOKEN)
 
     if yeni_bulunan:
         kayitlari_kaydet(gorulenler)
