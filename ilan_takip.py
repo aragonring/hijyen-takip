@@ -17,15 +17,16 @@ ANAHTAR_KELIMELER = [
     r"\bkoruma ve güvenlik\b",
     r"\bgüvenlik\b",
     r"\bdiyaliz\b",
-    r"\btemizlik görevlisi\b",
+    r"\bsağlık teknikeri\b",
     r"\btemizlik\b",
     r"\bşoför\b",
+    r"\bdestek personeli\b",
+    r"\bsürekli işçi\b",
     r"\bişçi\b",
-    r"\bbakım\b",
-    r"\bonarım\b",
     r"\bpersonel alım\w*\b",
     r"\bmemur alım\w*\b",
     r"\bsözleşmeli personel\b",
+    r"\b4/b\b",
 ]
 
 YASAKLI_KELIMELER = [
