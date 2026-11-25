@@ -170,8 +170,6 @@ def siteleri_tara():
 
         browser.close()
 
-    telegram_gonder("✅ SCÜ botu bağlantısı aktif!", token=SCU_TELEGRAM_TOKEN)
-
     if yeni_bulunan:
         kayitlari_kaydet(gorulenler)
 
