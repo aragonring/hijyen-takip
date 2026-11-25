@@ -33,6 +33,7 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           ILANGOV_TELEGRAM_TOKEN: ${{ secrets.ILANGOV_TELEGRAM_TOKEN }}
           ISKUR_TELEGRAM_TOKEN: ${{ secrets.ISKUR_TELEGRAM_TOKEN }}
+          SCU_TELEGRAM_TOKEN: ${{ secrets.SCU_TELEGRAM_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: python ilan_takip.py
 
